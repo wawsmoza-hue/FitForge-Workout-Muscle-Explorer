@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/fitforge-mobile/"
+title = "FitForge Fitness App"
+description = "A polished mobile fitness and bodybuilding app with onboarding, personalized workout dashboard, muscle-based exercise browsing, progress tracking, nutrition planning, and profile settings."
+version = "1.0.0"
+id = "artifacts/fitforge-mobile"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/fitforge-mobile/" ]
+localPort = 23863
+
+[services.development]
+run = "pnpm --filter @workspace/fitforge-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fitforge-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/fitforge-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "23863"
+BASE_PATH = "/fitforge-mobile/"

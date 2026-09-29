@@ -1,0 +1,122 @@
+Create a modern, professional Fitness & Bodybuilding mobile app called "FitForge".
+
+The app should have a premium, clean and motivating UI designed for Android and iOS.
+
+MAIN FEATURES:
+
+1. Onboarding
+- Welcome screen with powerful fitness imagery
+- Ask the user for:
+  - Age
+  - Fitness level: Beginner / Intermediate / Advanced
+  - Main goal: Build Muscle / Strength / Lose Fat / General Fitness
+  - Training experience
+  - Available training days per week
+- Generate a personalized workout plan.
+
+2. Home Dashboard
+- Personalized greeting
+- Today's workout
+- Workout progress
+- Weekly training statistics
+- Calories burned
+- Workout streak
+- Progress percentage
+- Quick button: "Start Workout"
+
+3. Workout System
+- Categories:
+  - Chest
+  - Back
+  - Shoulders
+  - Arms
+  - Legs
+  - Abs
+  - Full Body
+- Each workout contains:
+  - Exercise name
+  - Exercise illustration/video
+  - Sets
+  - Repetitions
+  - Rest timer
+  - Weight tracking
+  - Previous performance
+- Start/Pause/Finish workout buttons.
+
+4. Exercise Library
+- Search exercises
+- Filter by muscle group
+- Equipment:
+  - Dumbbells
+  - Barbell
+  - Machines
+  - Bodyweight
+  - Resistance bands
+- Exercise detail page with:
+  - Target muscles
+  - Instructions
+  - Sets and reps
+  - Difficulty
+  - Common mistakes
+  - Safety tips
+
+5. Progress Tracking
+- Body weight tracking
+- Workout history
+- Strength progression
+- Personal records
+- Weekly/monthly charts
+- Progress photos section
+- Measurements:
+  - Weight
+  - Chest
+  - Arms
+  - Waist
+  - Legs
+
+6. Nutrition
+- Daily calorie overview
+- Protein / Carbs / Fat tracking
+- Water intake
+- Simple meal suggestions
+- Meal history
+- Macro calculator
+
+7. Profile
+- User profile
+- Fitness goal
+- Training level
+- Personal statistics
+- App settings
+- Notifications
+- Dark mode
+
+DESIGN:
+
+Use a premium dark fitness aesthetic.
+Background: dark charcoal/black.
+Use a strong accent color for buttons and progress indicators.
+Large modern typography.
+Rounded cards.
+Smooth animations.
+Minimal and professional interface.
+Use high-quality fitness imagery.
+Bottom navigation with:
+Home / Workouts / Progress / Nutrition / Profile.
+
+UX:
+- Fast navigation
+- Clear hierarchy
+- Large touch targets
+- Responsive mobile design
+- Smooth transitions
+- Empty states
+- Loading states
+- Error handling
+- Beginner-friendly interface
+
+IMPORTANT:
+Make the app feel like a real commercial fitness application, not a simple prototype.
+Create reusable components and a consistent design system.
+Use realistic sample workout data.
+The interface should be polished, modern and production-ready.
