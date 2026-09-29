@@ -34,6 +34,8 @@ export type Exercise = {
   instructions: string[];
   mistakes: string[];
   safety: string;
+  videoUrl: string;
+  videoSource: 'YouTube';
 };
 
 export type MuscleGroup = {
@@ -132,7 +134,20 @@ const make = (
   sets: number,
   reps: string,
   rest: string,
-): Exercise => ({ id, name, muscle, subtarget, equipment, difficulty, sets, reps, rest, ...base[muscle] });
+): Exercise => ({
+  id,
+  name,
+  muscle,
+  subtarget,
+  equipment,
+  difficulty,
+  sets,
+  reps,
+  rest,
+  ...base[muscle],
+  videoUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} proper form`)}`,
+  videoSource: 'YouTube',
+});
 
 export const exercises: Exercise[] = [
   make('barbell-bench-press', 'Barbell Bench Press', 'chest', 'Mid chest', 'Barbell', 'Intermediate', 4, '6–10', '90 sec'),
@@ -188,6 +203,120 @@ export const exercises: Exercise[] = [
   make('tongue-posture', 'Relaxed Tongue Posture', 'jaw', 'Jaw awareness', 'At home', 'Beginner', 3, '30 sec', '30 sec'),
   make('controlled-jaw-open', 'Controlled Jaw Opening', 'jaw', 'Jaw mobility', 'At home', 'Beginner', 2, '8–10', '30 sec'),
   make('masseter-relaxation', 'Masseter Relaxation', 'jaw', 'Facial relaxation', 'At home', 'Beginner', 2, '30 sec / side', '30 sec'),
+  // Chest — additional barbell, dumbbell, cable, machine, band, and bodyweight variations.
+  make('incline-barbell-bench', 'Incline Barbell Bench Press', 'chest', 'Upper chest', 'Barbell', 'Intermediate', 4, '6–10', '90 sec'),
+  make('decline-barbell-bench', 'Decline Barbell Bench Press', 'chest', 'Lower chest', 'Barbell', 'Intermediate', 4, '6–10', '90 sec'),
+  make('flat-dumbbell-press', 'Flat Dumbbell Press', 'chest', 'Mid chest', 'Dumbbells', 'Beginner', 4, '8–12', '90 sec'),
+  make('incline-cable-fly', 'Incline Cable Fly', 'chest', 'Upper chest', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('low-to-high-cable-fly', 'Low-to-High Cable Fly', 'chest', 'Upper chest', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('high-to-low-cable-fly', 'High-to-Low Cable Fly', 'chest', 'Lower chest', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('pec-deck-fly', 'Pec Deck Fly', 'chest', 'Inner chest', 'Machine', 'Beginner', 3, '10–15', '60 sec'),
+  make('smith-machine-bench', 'Smith Machine Bench Press', 'chest', 'Mid chest', 'Machine', 'Beginner', 4, '8–12', '90 sec'),
+  make('dumbbell-pullover', 'Dumbbell Pullover', 'chest', 'Chest & serratus', 'Dumbbells', 'Intermediate', 3, '10–14', '75 sec'),
+  make('landmine-chest-press', 'Landmine Chest Press', 'chest', 'Upper chest', 'Barbell', 'Intermediate', 3, '8–12', '75 sec'),
+  make('assisted-chest-dip', 'Assisted Chest Dip', 'chest', 'Lower chest', 'Machine', 'Beginner', 3, '8–12', '75 sec'),
+  make('chest-squeeze-press', 'Dumbbell Squeeze Press', 'chest', 'Inner chest', 'Dumbbells', 'Beginner', 3, '10–15', '60 sec'),
+  make('band-chest-press', 'Resistance Band Chest Press', 'chest', 'Full chest', 'Bands', 'Beginner', 3, '12–20', '45 sec'),
+  make('single-arm-cable-press', 'Single-Arm Cable Press', 'chest', 'Unilateral chest', 'Cable', 'Intermediate', 3, '10–12 / side', '60 sec'),
+  // Back — vertical pulls, rows, spinal erectors, and trap-focused work.
+  make('conventional-deadlift', 'Conventional Deadlift', 'back', 'Full posterior chain', 'Barbell', 'Advanced', 4, '3–6', '150 sec'),
+  make('t-bar-row', 'T-Bar Row', 'back', 'Mid back', 'Barbell', 'Intermediate', 4, '8–12', '120 sec'),
+  make('chest-supported-dumbbell-row', 'Chest-Supported Dumbbell Row', 'back', 'Mid back', 'Dumbbells', 'Beginner', 3, '10–14', '75 sec'),
+  make('close-grip-lat-pulldown', 'Close-Grip Lat Pulldown', 'back', 'Lower lats', 'Machine', 'Beginner', 4, '8–12', '90 sec'),
+  make('straight-arm-pulldown', 'Straight-Arm Pulldown', 'back', 'Lats', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('machine-high-row', 'Machine High Row', 'back', 'Upper lats', 'Machine', 'Beginner', 3, '10–14', '75 sec'),
+  make('cable-pullover', 'Cable Pullover', 'back', 'Lats', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('dumbbell-shrug', 'Dumbbell Shrug', 'back', 'Upper traps', 'Dumbbells', 'Beginner', 4, '10–15', '60 sec'),
+  make('barbell-shrug', 'Barbell Shrug', 'back', 'Upper traps', 'Barbell', 'Intermediate', 4, '8–12', '75 sec'),
+  make('reverse-hyperextension', 'Reverse Hyperextension', 'back', 'Lower back', 'Machine', 'Intermediate', 3, '10–15', '75 sec'),
+  make('inverted-row', 'Inverted Row', 'back', 'Mid back', 'Bodyweight', 'Beginner', 3, '8–15', '75 sec'),
+  make('banded-lat-pulldown', 'Banded Lat Pulldown', 'back', 'Lats', 'Bands', 'Beginner', 3, '12–20', '45 sec'),
+  // Shoulders — front, lateral, rear delts, and stable pressing patterns.
+  make('arnold-press', 'Arnold Press', 'shoulders', 'Front & side delts', 'Dumbbells', 'Intermediate', 4, '8–12', '90 sec'),
+  make('seated-dumbbell-press', 'Seated Dumbbell Shoulder Press', 'shoulders', 'Front delts', 'Dumbbells', 'Beginner', 4, '8–12', '90 sec'),
+  make('front-raise', 'Dumbbell Front Raise', 'shoulders', 'Front delts', 'Dumbbells', 'Beginner', 3, '12–15', '60 sec'),
+  make('cable-lateral-raise', 'Cable Lateral Raise', 'shoulders', 'Side delts', 'Cable', 'Beginner', 4, '12–20', '60 sec'),
+  make('leaning-cable-lateral-raise', 'Leaning Cable Lateral Raise', 'shoulders', 'Side delts', 'Cable', 'Intermediate', 3, '12–15', '60 sec'),
+  make('machine-shoulder-press', 'Machine Shoulder Press', 'shoulders', 'Front delts', 'Machine', 'Beginner', 4, '8–12', '90 sec'),
+  make('cable-rear-delt-fly', 'Cable Rear Delt Fly', 'shoulders', 'Rear delts', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('dumbbell-y-raise', 'Dumbbell Y-Raise', 'shoulders', 'Lower traps & delts', 'Dumbbells', 'Beginner', 3, '10–15', '60 sec'),
+  make('pike-push-up', 'Pike Push-up', 'shoulders', 'Front delts', 'Bodyweight', 'Intermediate', 3, '6–12', '75 sec'),
+  make('band-pull-apart', 'Band Pull-Apart', 'shoulders', 'Rear delts', 'Bands', 'Beginner', 3, '15–25', '45 sec'),
+  // Biceps — multiple grip, angle, and cable variations.
+  make('alternating-dumbbell-curl', 'Alternating Dumbbell Curl', 'biceps', 'Biceps peak', 'Dumbbells', 'Beginner', 3, '10–14 / side', '60 sec'),
+  make('concentration-curl', 'Concentration Curl', 'biceps', 'Short head', 'Dumbbells', 'Beginner', 3, '10–14 / side', '60 sec'),
+  make('spider-curl', 'Spider Curl', 'biceps', 'Biceps peak', 'Dumbbells', 'Intermediate', 3, '10–14', '60 sec'),
+  make('drag-curl', 'Barbell Drag Curl', 'biceps', 'Long head', 'Barbell', 'Intermediate', 3, '8–12', '75 sec'),
+  make('zottman-curl', 'Zottman Curl', 'biceps', 'Biceps & forearms', 'Dumbbells', 'Intermediate', 3, '10–12', '60 sec'),
+  make('cross-body-hammer-curl', 'Cross-Body Hammer Curl', 'biceps', 'Brachialis', 'Dumbbells', 'Beginner', 3, '10–14 / side', '60 sec'),
+  make('cable-hammer-curl', 'Cable Rope Hammer Curl', 'biceps', 'Brachialis', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('band-curl', 'Resistance Band Curl', 'biceps', 'Full biceps', 'Bands', 'Beginner', 3, '15–20', '45 sec'),
+  // Triceps — pressing, overhead, extension, and bodyweight work.
+  make('single-arm-cable-pushdown', 'Single-Arm Cable Pushdown', 'triceps', 'Lateral head', 'Cable', 'Beginner', 3, '10–15 / side', '60 sec'),
+  make('cable-kickback', 'Cable Triceps Kickback', 'triceps', 'Lateral head', 'Cable', 'Beginner', 3, '12–15 / side', '60 sec'),
+  make('jm-press', 'JM Press', 'triceps', 'All heads', 'Barbell', 'Advanced', 3, '6–10', '90 sec'),
+  make('bench-dip', 'Bench Dip', 'triceps', 'All heads', 'Bodyweight', 'Beginner', 3, '8–15', '60 sec'),
+  make('close-grip-push-up', 'Close-Grip Push-up', 'triceps', 'Medial head', 'Bodyweight', 'Beginner', 3, 'AMRAP', '60 sec'),
+  make('single-dumbbell-overhead-extension', 'Single Dumbbell Overhead Extension', 'triceps', 'Long head', 'Dumbbells', 'Beginner', 3, '10–15', '60 sec'),
+  make('band-triceps-pressdown', 'Band Triceps Pressdown', 'triceps', 'All heads', 'Bands', 'Beginner', 3, '15–20', '45 sec'),
+  make('tate-press', 'Tate Press', 'triceps', 'Lateral head', 'Dumbbells', 'Intermediate', 3, '10–14', '60 sec'),
+  // Legs — quad, hamstring, adductor, and unilateral variations.
+  make('front-squat', 'Front Squat', 'legs', 'Quads', 'Barbell', 'Advanced', 4, '5–8', '120 sec'),
+  make('hack-squat', 'Hack Squat', 'legs', 'Quads', 'Machine', 'Intermediate', 4, '8–12', '120 sec'),
+  make('goblet-squat', 'Goblet Squat', 'legs', 'Quads & glutes', 'Dumbbells', 'Beginner', 3, '10–15', '75 sec'),
+  make('step-up', 'Dumbbell Step-up', 'legs', 'Quads & glutes', 'Dumbbells', 'Beginner', 3, '10 / side', '75 sec'),
+  make('reverse-lunge', 'Reverse Lunge', 'legs', 'Quads & glutes', 'Bodyweight', 'Beginner', 3, '10 / side', '60 sec'),
+  make('barbell-good-morning', 'Barbell Good Morning', 'legs', 'Hamstrings', 'Barbell', 'Advanced', 3, '8–12', '90 sec'),
+  make('nordic-hamstring-curl', 'Nordic Hamstring Curl', 'legs', 'Hamstrings', 'Bodyweight', 'Advanced', 3, '5–8', '120 sec'),
+  make('sissy-squat', 'Sissy Squat', 'legs', 'Quads', 'At home', 'Advanced', 3, '8–12', '75 sec'),
+  make('cossack-squat', 'Cossack Squat', 'legs', 'Adductors & mobility', 'Bodyweight', 'Intermediate', 3, '8 / side', '60 sec'),
+  make('banded-leg-curl', 'Banded Leg Curl', 'legs', 'Hamstrings', 'Bands', 'Beginner', 3, '15–20', '45 sec'),
+  // Glutes — hip extension, abduction, and single-leg patterns.
+  make('sumo-deadlift', 'Sumo Deadlift', 'glutes', 'Glutes & adductors', 'Barbell', 'Advanced', 4, '5–8', '120 sec'),
+  make('cable-pull-through', 'Cable Pull-Through', 'glutes', 'Glute max', 'Cable', 'Beginner', 3, '12–15', '60 sec'),
+  make('frog-pump', 'Frog Pump', 'glutes', 'Glute max', 'At home', 'Beginner', 3, '20–30', '45 sec'),
+  make('single-leg-hip-thrust', 'Single-Leg Hip Thrust', 'glutes', 'Glute max', 'Bodyweight', 'Intermediate', 3, '10–15 / side', '60 sec'),
+  make('glute-step-up', 'Glute-Biased Step-up', 'glutes', 'Glute max', 'Dumbbells', 'Intermediate', 3, '8–12 / side', '75 sec'),
+  make('hip-abduction-machine', 'Hip Abduction Machine', 'glutes', 'Glute medius', 'Machine', 'Beginner', 3, '15–25', '60 sec'),
+  make('banded-lateral-walk', 'Banded Lateral Walk', 'glutes', 'Glute medius', 'Bands', 'Beginner', 3, '12–20 / side', '45 sec'),
+  make('quadruped-kickback', 'Quadruped Kickback', 'glutes', 'Glute max', 'At home', 'Beginner', 3, '12–20 / side', '45 sec'),
+  // Calves — straight-knee, bent-knee, tibialis, and bodyweight options.
+  make('donkey-calf-raise', 'Donkey Calf Raise', 'calves', 'Gastrocnemius', 'Machine', 'Intermediate', 4, '10–15', '60 sec'),
+  make('leg-press-calf-raise', 'Leg Press Calf Raise', 'calves', 'Gastrocnemius', 'Machine', 'Beginner', 4, '12–20', '60 sec'),
+  make('tibialis-raise', 'Tibialis Raise', 'calves', 'Tibialis anterior', 'At home', 'Beginner', 3, '15–25', '45 sec'),
+  make('jump-rope-calf-pogo', 'Calf Pogo Hops', 'calves', 'Elastic strength', 'At home', 'Intermediate', 3, '20–30 sec', '45 sec'),
+  make('weighted-single-leg-calf', 'Weighted Single-Leg Calf Raise', 'calves', 'Full calf', 'Dumbbells', 'Intermediate', 3, '12–18 / side', '60 sec'),
+  make('band-calf-raise', 'Resistance Band Calf Raise', 'calves', 'Full calf', 'Bands', 'Beginner', 3, '15–25', '45 sec'),
+  // Core — flexion, anti-extension, anti-rotation, and lateral stability.
+  make('front-plank', 'Front Plank', 'core', 'Deep core', 'Bodyweight', 'Beginner', 3, '30–60 sec', '45 sec'),
+  make('reverse-crunch', 'Reverse Crunch', 'core', 'Lower abs', 'Bodyweight', 'Beginner', 3, '12–20', '45 sec'),
+  make('bicycle-crunch', 'Bicycle Crunch', 'core', 'Obliques', 'Bodyweight', 'Beginner', 3, '16–24 total', '45 sec'),
+  make('pallof-press', 'Pallof Press', 'core', 'Anti-rotation', 'Cable', 'Beginner', 3, '10–15 / side', '45 sec'),
+  make('dumbbell-russian-twist', 'Dumbbell Russian Twist', 'core', 'Obliques', 'Dumbbells', 'Intermediate', 3, '12–20 total', '60 sec'),
+  make('mountain-climber', 'Mountain Climber', 'core', 'Full core', 'Bodyweight', 'Beginner', 3, '30–45 sec', '45 sec'),
+  make('hollow-body-hold', 'Hollow Body Hold', 'core', 'Deep core', 'At home', 'Advanced', 3, '20–40 sec', '60 sec'),
+  make('bird-dog', 'Bird Dog', 'core', 'Core control', 'At home', 'Beginner', 3, '10 / side', '45 sec'),
+  make('suitcase-carry', 'Suitcase Carry', 'core', 'Anti-lateral flexion', 'Dumbbells', 'Intermediate', 3, '30–45 sec / side', '60 sec'),
+  make('banded-dead-bug', 'Banded Dead Bug', 'core', 'Anti-extension', 'Bands', 'Intermediate', 3, '8–12 / side', '45 sec'),
+  // Forearms — flexion, extension, pronation, and grip.
+  make('reverse-barbell-curl', 'Reverse Barbell Curl', 'forearms', 'Brachioradialis', 'Barbell', 'Beginner', 3, '10–15', '60 sec'),
+  make('wrist-roller', 'Wrist Roller', 'forearms', 'Forearm endurance', 'Cable', 'Intermediate', 3, '30–45 sec', '60 sec'),
+  make('plate-pinch-hold', 'Plate Pinch Hold', 'forearms', 'Pinch grip', 'Dumbbells', 'Beginner', 3, '20–40 sec', '60 sec'),
+  make('dead-hang', 'Dead Hang', 'forearms', 'Grip', 'Bodyweight', 'Beginner', 3, '20–60 sec', '75 sec'),
+  make('grip-squeeze', 'Grip Squeeze', 'forearms', 'Crush grip', 'At home', 'Beginner', 3, '20–30', '30 sec'),
+  make('dumbbell-pronation', 'Dumbbell Pronation & Supination', 'forearms', 'Rotators', 'Dumbbells', 'Beginner', 3, '12–15 / side', '45 sec'),
+  make('band-wrist-extension', 'Band Wrist Extension', 'forearms', 'Wrist extensors', 'Bands', 'Beginner', 3, '15–20', '45 sec'),
+  // Neck — gentle mobility and low-load isometrics only.
+  make('band-neck-flexion', 'Band Neck Flexion', 'neck', 'Neck flexors', 'Bands', 'Beginner', 2, '10–15', '45 sec'),
+  make('band-neck-extension', 'Band Neck Extension', 'neck', 'Neck extensors', 'Bands', 'Beginner', 2, '10–15', '45 sec'),
+  make('band-neck-lateral-flexion', 'Band Neck Lateral Flexion', 'neck', 'Lateral neck', 'Bands', 'Beginner', 2, '10–15 / side', '45 sec'),
+  make('neck-rotation-control', 'Controlled Neck Rotation', 'neck', 'Mobility', 'At home', 'Beginner', 2, '5–8 / side', '30 sec'),
+  make('scapular-retraction-hold', 'Scapular Retraction Hold', 'neck', 'Upper neck support', 'Bands', 'Beginner', 3, '20–30 sec', '45 sec'),
+  // Jaw & face — gentle awareness and relaxation, never forced resistance.
+  make('controlled-jaw-lateral', 'Controlled Jaw Lateral Glide', 'jaw', 'Jaw mobility', 'At home', 'Beginner', 2, '6–8 / side', '30 sec'),
+  make('jaw-relaxed-open-close', 'Relaxed Jaw Open & Close', 'jaw', 'Jaw control', 'At home', 'Beginner', 2, '8–10', '30 sec'),
+  make('masseter-self-massage', 'Masseter Self-Massage', 'jaw', 'Facial relaxation', 'At home', 'Beginner', 2, '30 sec / side', '30 sec'),
+  make('nasal-breathing-reset', 'Nasal Breathing Reset', 'jaw', 'Facial relaxation', 'At home', 'Beginner', 3, '5 breaths', '30 sec'),
 ];
 
 export const getMuscle = (id: MuscleId) => muscleGroups.find((group) => group.id === id) ?? muscleGroups[0];
