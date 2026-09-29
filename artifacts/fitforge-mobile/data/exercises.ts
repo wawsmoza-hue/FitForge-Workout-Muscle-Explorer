@@ -34,9 +34,25 @@ export type Exercise = {
   instructions: string[];
   mistakes: string[];
   safety: string;
-  videoUrl: string;
-  videoSource: 'YouTube';
+  demoKey: DemoKey;
 };
+
+export type DemoKey =
+  | 'press'
+  | 'fly'
+  | 'pull'
+  | 'row'
+  | 'raise'
+  | 'curl'
+  | 'extension'
+  | 'squat'
+  | 'hinge'
+  | 'thrust'
+  | 'calf'
+  | 'core'
+  | 'grip'
+  | 'neck'
+  | 'jaw';
 
 export type MuscleGroup = {
   id: MuscleId;
@@ -145,9 +161,24 @@ const make = (
   reps,
   rest,
   ...base[muscle],
-  videoUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} proper form`)}`,
-  videoSource: 'YouTube',
+  demoKey: getDemoKey(muscle, equipment, name),
 });
+
+function getDemoKey(muscle: MuscleId, equipment: Equipment, name: string): DemoKey {
+  const lowerName = name.toLowerCase();
+  if (muscle === 'jaw') return 'jaw';
+  if (muscle === 'neck') return 'neck';
+  if (muscle === 'core') return 'core';
+  if (muscle === 'calves') return 'calf';
+  if (muscle === 'forearms') return 'grip';
+  if (muscle === 'glutes') return lowerName.includes('thrust') || lowerName.includes('bridge') || lowerName.includes('pump') ? 'thrust' : 'hinge';
+  if (muscle === 'legs') return lowerName.includes('deadlift') || lowerName.includes('good morning') || lowerName.includes('curl') ? 'hinge' : 'squat';
+  if (muscle === 'biceps') return 'curl';
+  if (muscle === 'triceps') return equipment === 'Cable' || lowerName.includes('pushdown') || lowerName.includes('extension') ? 'extension' : 'press';
+  if (muscle === 'shoulders') return lowerName.includes('raise') || lowerName.includes('pull-apart') ? 'raise' : 'press';
+  if (muscle === 'back') return lowerName.includes('row') || lowerName.includes('shrug') || lowerName.includes('extension') ? 'row' : 'pull';
+  return equipment === 'Cable' || lowerName.includes('fly') ? 'fly' : 'press';
+}
 
 export const exercises: Exercise[] = [
   make('barbell-bench-press', 'Barbell Bench Press', 'chest', 'Mid chest', 'Barbell', 'Intermediate', 4, '6–10', '90 sec'),
